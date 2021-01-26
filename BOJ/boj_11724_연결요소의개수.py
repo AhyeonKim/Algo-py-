@@ -7,10 +7,10 @@ for _ in range(M):
     link[u].append(v)
     link[v].append(u)
 visit = [False]*(N+1)
-answer=0
+ans=0
 for i in range(1,N+1):
     if not visit[i]:
-        answer+=1
+        ans+=1
         visit[i] = True
         q=[i]
         while q:
@@ -20,4 +20,4 @@ for i in range(1,N+1):
                     if not visit[j]:
                         visit[j] = True
                         q.append(j)
-print(answer)
+print(ans)
