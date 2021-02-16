@@ -7,7 +7,7 @@ def make(s,idx,v,c):
         return
     is_v = 0
     is_c = 0
-    if arr[idx] in ['a','e','i','o','u']:
+    if arr[idx] in 'aeiou':
         is_v = 1
     else:
         is_c = 1
