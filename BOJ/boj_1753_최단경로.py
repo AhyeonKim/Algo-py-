@@ -1,4 +1,6 @@
 import heapq
+import sys
+input = sys.stdin.readline
 V,E = map(int,input().split())
 K = int(input())
 nodes = [[] for _ in range(V+1)]
@@ -7,16 +9,15 @@ prices=[INF] * (V+1)
 prices[K] = 0
 for _ in range(E):
     u,v,w = map(int,input().split())
-    nodes[u].append((w,u,v))
-heapq.heappush(tmp,nodes[K])
+    nodes[u].append((w,v))
+tmp = [(0,K)]
 while tmp:
-    value, current, next_node = heapq.heappop(tmp)
-    if prices[next_node] > prices[current] + value:
-        prices[next_node] = prices[current] + value
-        for node in nodes[next_node]:
-            heapq.heappush(tmp,node)
+    value, current = heapq.heappop(tmp)
+    for (w,v) in nodes[current]:
+        if prices[current] + w < prices[v]:
+            prices[v] = prices[current] + w
+            heapq.heappush(tmp,(prices[v],v))
 for i in range(1,V+1):
     if prices[i]==INF:
         print('INF')
     else: print(prices[i])
-
