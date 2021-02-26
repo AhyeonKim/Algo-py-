@@ -30,7 +30,6 @@ while flag:
         board[tail[0]][tail[1]]=-1
         tail = [tail[0]+move[td][0], tail[1]+move[td][1]]
     head = [ni,nj]
-    board[ni][nj] = d
     if info and info[0][0]==t:
         tmp = info[0][1]
         info.pop(0)
