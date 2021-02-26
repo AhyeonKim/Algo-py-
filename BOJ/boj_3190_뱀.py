@@ -18,8 +18,7 @@ for _ in range(L):
 head=[0,0]
 tail=[0,0]
 t=0
-flag = True
-while flag:
+while True:
     t+=1
     d = board[head[0]][head[1]]
     ni,nj = head[0]+move[d][0], head[1]+move[d][1]
