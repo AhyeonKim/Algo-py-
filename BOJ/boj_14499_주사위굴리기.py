@@ -5,4 +5,3 @@ board = []
 for _ in range(N):
     board.append(list(map(int,input().split())))
 move = list(map(int,input().split()))
-# ㅋㅋ
