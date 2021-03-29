@@ -41,9 +41,6 @@ while t<=1000:
             shark[s] = next
 
 
-            
-
-
 if t>1000:
     print(-1)
 else:
