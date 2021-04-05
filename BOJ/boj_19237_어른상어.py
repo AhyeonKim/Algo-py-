@@ -25,11 +25,11 @@ while t<=1000:
         smell[shark[s][0]][shark[s][1]]=[s,k]
     t+=1
     #shark move
+    tmp = []
     for s in shark:
         next = [0,0,0]
         si,sj,sd = s
         for d in range(4):
-            tmp = []
             nd = priority[s][sd][d]
             ni,nj = si+di[nd],sj+dj[nd]
             if not smell[ni][nj]:
@@ -40,6 +40,11 @@ while t<=1000:
         else:
             shark[s] = next
 
+    for i in range(len(smell)):
+        if smell[i]:
+            smell[i][1]-=1
+            if smell[i][1]==0:
+                smell[i]=False
 
 if t>1000:
     print(-1)
