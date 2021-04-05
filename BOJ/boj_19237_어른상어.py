@@ -11,13 +11,11 @@ for i in range(N):
 s_d = list(map(int,input().split()))
 for i in range(len(s_d)):
     shark[i+1].append(s_d[i]-1)
-print(shark)
 priority = {}
-for i in range(M):
+for i in range(1,M+1):
     priority[i] = []
     for _ in range(4):
         priority[i].append(list(map(lambda x:x-1,map(int,input().split()))))
-print(priority)
 smell = [[False for _ in range(N)] for _ in range(N)]
 t = 0
 while t<=1000:
@@ -25,27 +23,43 @@ while t<=1000:
         smell[shark[s][0]][shark[s][1]]=[s,k]
     t+=1
     #shark move
-    tmp = []
+    tmp = {}
     for s in shark:
-        next = [0,0,0]
-        si,sj,sd = s
+        next = None
+        si,sj,sd = shark[s]
         for d in range(4):
             nd = priority[s][sd][d]
             ni,nj = si+di[nd],sj+dj[nd]
-            if not smell[ni][nj]:
-                shark[s] = [ni,nj,nd]
-                break
-            elif s==smell[ni][nj][0]:
-                next = [ni,nj,nd]
+            if -1<ni<N and -1<nj<N:
+                if not smell[ni][nj]:
+                    if (ni,nj) in tmp:
+                        cur_s, cur_d = tmp[(ni,nj)]
+                        if cur_s>s:
+                            tmp[(ni,nj)] = (s,nd)
+                    else:
+                        tmp[(ni,nj)] = (s,nd)
+                    break
+                elif s==smell[ni][nj][0] and not next:
+                    next = [ni,nj,nd]
         else:
-            shark[s] = next
-
-    for i in range(len(smell)):
-        if smell[i]:
-            smell[i][1]-=1
-            if smell[i][1]==0:
-                smell[i]=False
-
+            if (next[0],next[1]) in tmp:
+                cur_s, cur_d = tmp[(next[0],next[1])]
+                if cur_s>s:
+                    tmp[(next[0],next[1])] = (s,next[2])
+            else:
+                tmp[(next[0],next[1])] = (s,next[2])
+    shark = {}
+    for (i,j) in tmp:
+        n,d = tmp[(i,j)]
+        shark[n] = [i,j,d]
+    if len(shark)==1:
+        break
+    for i in range(N):
+        for j in range(N):
+            if smell[i][j]:
+                smell[i][j][1]-=1
+                if smell[i][j][1]==0:
+                    smell[i][j]=False
 if t>1000:
     print(-1)
 else:
