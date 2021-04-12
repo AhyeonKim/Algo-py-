@@ -1,9 +1,8 @@
 import sys
 from collections import deque
-sys.setrecursionlimit(10**6)
 
 def isIn(i,j):
-    return 0<=i<N and 0<=j<N
+    return -1<i<N and -1<j<N
 
 N, L, R = map(int,input().split())
 ground=[]
@@ -36,9 +35,9 @@ while flag:
                             q.append((ni,nj))
                 if cnt>1:
                     flag = True
-                    for i,j in tmp:
+                    for y,x in tmp:
                         value = total//cnt
-                        ground[i][j] = value
+                        ground[y][x] = value
     if flag:
         ans+=1
 print(ans)
