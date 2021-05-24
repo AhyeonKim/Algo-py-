@@ -1,8 +1,10 @@
+import sys
+input = sys.stdin.readline
 N = int(input())
 M = int(input())
 budgets = [list(map(int,input().split())) for _ in range(M)]
-budgets.sort(key=lambda x:x[2])
-parents = [i for i in range(N)] # 부모 노드
+budgets.sort(key=lambda x:x[2],reverse=True)
+parents = [i for i in range(N)]
 answer=0
 def find(a):
     if parents[a]==a:
@@ -14,12 +16,13 @@ def union(a,b):
     p2 = find(b)
     if p1!=p2:
         parents[p1]=p2
-    return
-for i in range(len(budgets)):
-    a,b,c = budgets[i]
+cnt = 1
+while cnt<N:
+    a,b,c = budgets.pop()
     a-=1
     b-=1
     if find(a)!=find(b):
         union(a,b)
+        cnt+=1
         answer+=c
 print(answer)
