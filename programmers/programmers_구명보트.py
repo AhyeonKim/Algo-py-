@@ -1,21 +1,15 @@
 def solution(people, limit):
     answer = 0
-    s = 0
-    p = 0
     people.sort()
-    while p!=len(people):
-        for i in range(len(people)):
-            if people[i]:
-                if s:
-                    if s+people[i]<=limit:
-                        s=0
-                        p+=1
-                        people[i]=0
-                    else:
-                        continue
-                else:
-                    answer+=1
-                    s=people[i]
-                    p+=1
-                    people[i]=0
+    left = 0
+    right = len(people)-1
+    while left<=right:
+        if people[left]+people[right]<=limit:
+            left+=1
+            right-=1
+        else:
+            right-=1
+        answer+=1
+    if left==right:
+        answer+=1
     return answer
