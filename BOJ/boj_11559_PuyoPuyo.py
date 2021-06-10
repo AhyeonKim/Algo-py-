@@ -29,7 +29,7 @@ while True:
                         board[y][x]='.'
     for jj in range(6):
         for ii in range(10,-1,-1):
-            if board[ii]+[jj]!='.':
+            if board[ii][jj]!='.':
                 pii=ii
                 nii=ii+1
                 while nii<12:
