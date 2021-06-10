@@ -28,17 +28,16 @@ while True:
                     for y,x in tmp:
                         board[y][x]='.'
     for jj in range(6):
-        for ii in range(11,-1,-1):
+        for ii in range(10,-1,-1):
             if board[ii]+[jj]!='.':
+                pii=ii
                 nii=ii+1
                 while nii<12:
                     if board[nii][jj]=='.':
-                        board[nii][jj]=board[ii][jj]
-                        board[ii][jj]='.'
+                        board[nii][jj]=board[pii][jj]
+                        board[pii][jj]='.'
+                    pii=nii
                     nii+=1
-    for b in board:
-        print(b)
-    print('---------------')
     if not flag:
         break
     else:
